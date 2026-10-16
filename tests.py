@@ -96,6 +96,61 @@ class TestCreditCardValidator(unittest.TestCase):
         """
         self.assertFalse(credit_card_validator('2721567891234561'))
 
+    def test_american_express_valid(self):
+        """
+        Verify that a valid American Express prefix 34 returns True.
+        Selected using Partition testing.
+        """
+        self.assertTrue(credit_card_validator('341234567891232'))
+
+    def test_american_express_upper_boundary(self):
+        """
+        Verify that a valid American Express with prefix 37 returns True.
+        Selected using boundary value testing by using the
+        upper boundary of the accepted prefix.
+        """
+        self.assertTrue(credit_card_validator('371234567891235'))
+
+    def test_american_express_invalid_prefix_35(self):
+        """
+        Verify that an invalid American Express with prefix 35 returns False.
+        Selected using partition testing by choosing an invalid prefix
+        between the two accepted prefixes (34 and 37).
+        """
+        self.assertFalse(credit_card_validator('352056789123458'))
+
+    def test_american_express_invalid_prefix_36(self):
+        """
+        Verify that an invalid American Express with prefix 36 returns False.
+        Selected using partition testing by choosing an invalid prefix
+        between the two accepted prefixes (34 and 37).
+        """
+        self.assertFalse(credit_card_validator('362156789123454'))
+
+    def test_american_express_invalid_checksum(self):
+        """
+        Verify that an American Express card with an invalid
+        Luhn checksum returns False.
+        Selected using partition testing by choosing an
+        invalid checksum with a valid prefix and length.
+        """
+        self.assertFalse(credit_card_validator('341234567891231'))
+
+    def test_american_express_short_length(self):
+        """
+        Verify that an American Express with an invalid length returns False.
+        Selected using boundary value testing by choosing a length
+        one digit below required length.
+        """
+        self.assertFalse(credit_card_validator('34123456789122'))
+
+    def test_american_express_long_length(self):
+        """
+        Verify that an American Express with an invalid length returns False.
+        Selected using boundary value testing by choosing a length
+        one digit above required length.
+        """
+        self.assertFalse(credit_card_validator('3712345678912314'))
     
 
 
