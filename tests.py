@@ -1,6 +1,7 @@
 import unittest
 from credit_card_validator import credit_card_validator
 
+
 class TestCreditCardValidator(unittest.TestCase):
     def test_visa_card(self):
         """
@@ -22,7 +23,7 @@ class TestCreditCardValidator(unittest.TestCase):
         Selected using boundary value testing by choosing a length
         one digit below required length.
         """
-        self.assertFalse(credit_card_validator('423456789123456'))
+        self.assertFalse(credit_card_validator('423456789123455'))
 
     def test_visa_long_length(self):
         """
@@ -97,7 +98,7 @@ class TestCreditCardValidator(unittest.TestCase):
 
     def test_mastercard_invalid_checksum(self):
         """
-        Verify that a MasterCard card with an invalid
+        Verify that a MasterCard with an invalid
         Luhn checksum returns False.
         Selected using partition testing by choosing an
         invalid checksum with a valid prefix and length.
@@ -175,9 +176,6 @@ class TestCreditCardValidator(unittest.TestCase):
         one digit above required length.
         """
         self.assertFalse(credit_card_validator('3712345678912314'))
-    
-
-
 
 
 if __name__ == '__main__':
