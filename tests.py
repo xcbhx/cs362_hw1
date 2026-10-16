@@ -1,8 +1,7 @@
 import unittest
-from credit_card_validator import credit_card_validator 
+from credit_card_validator import credit_card_validator
 
 class TestCreditCardValidator(unittest.TestCase):
-    
     def test_visa_card(self):
         """
         Verify that a valid Visa card returns True.
@@ -20,7 +19,7 @@ class TestCreditCardValidator(unittest.TestCase):
     def test_visa_short_length(self):
         """
         Verify that a Visa number with an invalid length returns False.
-        Selected using boundary value testing by choosing a length 
+        Selected using boundary value testing by choosing a length
         one digit below required length.
         """
         self.assertFalse(credit_card_validator('423456789123456'))
@@ -28,7 +27,7 @@ class TestCreditCardValidator(unittest.TestCase):
     def test_visa_long_length(self):
         """
         Verify that a Visa number with an invalid length returns False.
-        Selected using boundary value testing by choosing a length 
+        Selected using boundary value testing by choosing a length
         one digit above required length.
         """
         self.assertFalse(credit_card_validator('42345678912345674'))
@@ -95,6 +94,31 @@ class TestCreditCardValidator(unittest.TestCase):
         one value above the accepted prefix range (2221-2720).
         """
         self.assertFalse(credit_card_validator('2721567891234561'))
+
+    def test_mastercard_invalid_checksum(self):
+        """
+        Verify that a MasterCard card with an invalid
+        Luhn checksum returns False.
+        Selected using partition testing by choosing an
+        invalid checksum with a valid prefix and length.
+        """
+        self.assertFalse(credit_card_validator('5112345678912340'))
+
+    def test_mastercard_short_length(self):
+        """
+        Verify that a MasterCard with an invalid length returns False.
+        Selected using boundary value testing by choosing a length
+        one digit below required length.
+        """
+        self.assertFalse(credit_card_validator('272034567891239'))
+
+    def test_mastercard_long_length(self):
+        """
+        Verify that a MasterCard with an invalid length returns False.
+        Selected using boundary value testing by choosing a length
+        one digit above required length.
+        """
+        self.assertFalse(credit_card_validator('22213456789123446'))
 
     def test_american_express_valid(self):
         """
