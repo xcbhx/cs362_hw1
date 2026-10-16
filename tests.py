@@ -33,6 +33,14 @@ class TestCreditCardValidator(unittest.TestCase):
         """
         self.assertFalse(credit_card_validator('42345678912345674'))
 
+    def test_visa_invalid_prefix(self):
+        """
+        Verify that a Visa number that has 4 but doesn't start
+        with 4 returns False.
+        Selected using error guessing.
+        """
+        self.assertFalse(credit_card_validator('7263148936274020'))
+
     def test_mastercard_valid(self):
         """
         Verify that a valid MasterCard returns True.
