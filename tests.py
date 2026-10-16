@@ -96,6 +96,14 @@ class TestCreditCardValidator(unittest.TestCase):
         """
         self.assertFalse(credit_card_validator('2721567891234561'))
 
+    def test_mastercard_valid_interior_prefix(self):
+        """
+        Verify that a valid MasterCard with prefix 2400 returns True.
+        Selected using partition testing by choosing
+        one value inside the accepted prefix range (2221-2720).
+        """
+        self.assertTrue(credit_card_validator('2400123456789124'))
+
     def test_mastercard_invalid_checksum(self):
         """
         Verify that a MasterCard with an invalid
