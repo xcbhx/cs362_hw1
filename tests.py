@@ -41,6 +41,15 @@ class TestCreditCardValidator(unittest.TestCase):
         """
         self.assertFalse(credit_card_validator('7263148936274020'))
 
+    def test_visa_valid_with_zeros(self):
+        """
+        Verify that a valid Visa number containing
+        multiple zeros returns true.
+        Selected using error guessing to investigate whether
+        the Luhn checksum is implemented incorrectly.
+        """
+        self.assertTrue(credit_card_validator('4123120030206320'))
+
     def test_mastercard_valid(self):
         """
         Verify that a valid MasterCard returns True.
