@@ -153,7 +153,7 @@ class TestCreditCardValidator(unittest.TestCase):
         Selected using partition testing by choosing an
         invalid checksum with a valid prefix and length.
         """
-        self.assertFalse(credit_card_validator('2221345678912345'))  
+        self.assertFalse(credit_card_validator('2221345678912345'))
 
     def test_mastercard_invalid_checksum_prefix_2720(self):
         """
@@ -162,7 +162,7 @@ class TestCreditCardValidator(unittest.TestCase):
         Selected using partition testing by choosing an
         invalid checksum with a valid prefix and length.
         """
-        self.assertFalse(credit_card_validator('2720345678912341'))    
+        self.assertFalse(credit_card_validator('2720345678912341'))
 
     def test_american_express_valid(self):
         """
@@ -219,6 +219,35 @@ class TestCreditCardValidator(unittest.TestCase):
         one digit above required length.
         """
         self.assertFalse(credit_card_validator('3712345678912314'))
+
+    def test_length_boundary_min(self):
+        """
+        Verify that a card number below 10 digit minimum length returns False.
+        Selected using boundary value testing.
+        """
+        self.assertFalse(credit_card_validator('4123456789'))
+
+    def test_length_boundary_max(self):
+        """
+        Verify that a card number below 16 digit maximum length returns False.
+        Selected using boundary value testing.
+        """
+        self.assertFalse(credit_card_validator('41234567890123456789'))
+
+    def test_non_digit(self):
+        """
+        Verify behavior when testing boundary card lengths.
+        Selected using error guessing.
+        """
+        self.assertFalse(credit_card_validator(''))
+
+    def test_unsupported_issuer_length(self):
+        """
+        Verify that an otherwise valid structure with incorrect
+        global length limits return False.
+        Selected using boundary value testing.
+        """
+        self.assertFalse(credit_card_validator('4123456789'))
 
 
 if __name__ == '__main__':
