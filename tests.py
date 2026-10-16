@@ -146,6 +146,24 @@ class TestCreditCardValidator(unittest.TestCase):
         """
         self.assertFalse(credit_card_validator('22213456789123446'))
 
+    def test_mastercard_invalid_checksum_prefix_2221(self):
+        """
+        Verify that a MasterCard with prefix 2221 and invalid
+        Luhn checksum returns False.
+        Selected using partition testing by choosing an
+        invalid checksum with a valid prefix and length.
+        """
+        self.assertFalse(credit_card_validator('2221345678912345'))  
+
+    def test_mastercard_invalid_checksum_prefix_2720(self):
+        """
+        Verify that a MasterCard with prefix 2720 and invalid
+        Luhn checksum returns False.
+        Selected using partition testing by choosing an
+        invalid checksum with a valid prefix and length.
+        """
+        self.assertFalse(credit_card_validator('2720345678912341'))    
+
     def test_american_express_valid(self):
         """
         Verify that a valid American Express prefix 34 returns True.
