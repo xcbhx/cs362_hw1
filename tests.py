@@ -288,7 +288,7 @@ class TestCreditCardValidator(unittest.TestCase):
         Selected using combination testing and error guessing.
         """
         self.assertFalse(credit_card_validator('300012345678901'))
-        
+
     def test_mastercard_invalid_length_and_checksum(self):
         """
         Verify a MasterCard with a valid prefix,
@@ -311,15 +311,15 @@ class TestCreditCardValidator(unittest.TestCase):
         invalid length, and valid Luhn checksum returns False.
         Selected using combination testing.
         """
-        self.assertFalse(credit_card_validator('300012345678900'))    
+        self.assertFalse(credit_card_validator('300012345678900'))
 
-    def test_mastercard_second_range_invalid_length(self):
+    def test_mastercard_second_range_invalid_length_and_checksum(self):
         """
         Verify a MasterCard with prefix 2400,
-        invalid length, and valid Luhn checksum returns False.
+        invalid length, and invalid Luhn checksum returns False.
         Selected using combination testing.
         """
-        self.assertFalse(credit_card_validator('240012345678903'))
+        self.assertFalse(credit_card_validator('240012345678902'))
 
     def test_mastercard_second_range_invalid_checksum(self):
         """
@@ -328,6 +328,38 @@ class TestCreditCardValidator(unittest.TestCase):
         Selected using combination testing.
         """
         self.assertFalse(credit_card_validator('2400123456789015'))
+
+    def test_american_express_invalid_length_and_checksum(self):
+        """
+        Verify an American Express number with a valid prefix,
+        invalid length, and invalid Luhn checksum returns False.
+        Selected using combination testing.
+        """
+        self.assertFalse(credit_card_validator('37123456789013'))
+
+    def test_american_express_invalid_prefix_and_checksum(self):
+        """
+        Verify a number with an invalid prefix,
+        valid length, and invalid Luhn checksum returns False.
+        Selected using combination testing.
+        """
+        self.assertFalse(credit_card_validator('351234567890125'))
+
+    def test_american_express_invalid_prefix_and_length(self):
+        """
+        Verify a number with an invalid prefix,
+        invalid length, and valid Luhn checksum returns False.
+        Selected using combination testing.
+        """
+        self.assertFalse(credit_card_validator('35123456789014'))
+
+    def test_american_express_all_three_invalid(self):
+        """
+        Verify a number with an invalid prefix,
+        invalid length, and invalid Luhn checksum returns False.
+        Selected using combination testing and error guessing.
+        """
+        self.assertFalse(credit_card_validator('35123456789013'))
 
 
 if __name__ == '__main__':
