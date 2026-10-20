@@ -315,11 +315,11 @@ class TestCreditCardValidator(unittest.TestCase):
 
     def test_mastercard_second_range_invalid_length_and_checksum(self):
         """
-        Verify a MasterCard with prefix 2400,
+        Verify a MasterCard with prefix 51,
         invalid length, and invalid Luhn checksum returns False.
         Selected using combination testing.
         """
-        self.assertFalse(credit_card_validator('240012345678902'))
+        self.assertFalse(credit_card_validator('510012345678902'))
 
     def test_mastercard_second_range_invalid_checksum(self):
         """
