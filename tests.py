@@ -319,7 +319,7 @@ class TestCreditCardValidator(unittest.TestCase):
         invalid length, and invalid Luhn checksum returns False.
         Selected using combination testing.
         """
-        self.assertFalse(credit_card_validator('510012345678902'))
+        self.assertFalse(credit_card_validator('5100123456789025'))
 
     def test_mastercard_second_range_invalid_checksum(self):
         """
