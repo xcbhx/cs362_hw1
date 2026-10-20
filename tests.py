@@ -281,6 +281,54 @@ class TestCreditCardValidator(unittest.TestCase):
         """
         self.assertFalse(credit_card_validator('726314893627402'))
 
+    def test_mastercard_all_three_invalid(self):
+        """
+        Verify a number with an invalid prefix,
+        invalid length, and invalid Luhn checksum returns False.
+        Selected using combination testing and error guessing.
+        """
+        self.assertFalse(credit_card_validator('300012345678901'))
+        
+    def test_mastercard_invalid_length_and_checksum(self):
+        """
+        Verify a MasterCard with a valid prefix,
+        invalid length, and invalid Luhn checksum returns False.
+        Selected using combination testing.
+        """
+        self.assertFalse(credit_card_validator('531234567890126'))
+
+    def test_mastercard_invalid_prefix_and_checksum(self):
+        """
+        Verify a number with an invalid prefix,
+        valid length, and invalid Luhn checksum returns False.
+        Selected using combination testing.
+        """
+        self.assertFalse(credit_card_validator('3000123456789018'))
+
+    def test_mastercard_invalid_prefix_and_length(self):
+        """
+        Verify a number with an invalid prefix,
+        invalid length, and valid Luhn checksum returns False.
+        Selected using combination testing.
+        """
+        self.assertFalse(credit_card_validator('300012345678900'))    
+
+    def test_mastercard_second_range_invalid_length(self):
+        """
+        Verify a MasterCard with prefix 2400,
+        invalid length, and valid Luhn checksum returns False.
+        Selected using combination testing.
+        """
+        self.assertFalse(credit_card_validator('240012345678903'))
+
+    def test_mastercard_second_range_invalid_checksum(self):
+        """
+        Verify a MasterCard with prefix 2400,
+        valid length, and invalid Luhn checksum returns False.
+        Selected using combination testing.
+        """
+        self.assertFalse(credit_card_validator('2400123456789015'))
+
 
 if __name__ == '__main__':
     unittest.main()
