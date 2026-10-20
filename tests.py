@@ -229,7 +229,7 @@ class TestCreditCardValidator(unittest.TestCase):
 
     def test_length_boundary_max(self):
         """
-        Verify that a card number below 16 digit maximum length returns False.
+        Verify that a card number above 16 digit maximum length returns False.
         Selected using boundary value testing.
         """
         self.assertFalse(credit_card_validator('41234567890123456789'))
@@ -248,6 +248,38 @@ class TestCreditCardValidator(unittest.TestCase):
         Selected using boundary value testing.
         """
         self.assertFalse(credit_card_validator('4123456789'))
+
+    def test_visa_invalid_length_and_checksum(self):
+        """
+        Verify that a Visa number with a valid prefix,
+        invalid length, and invalid Luhn checksum returns False.
+        Selected using combination testing and error guessing.
+        """
+        self.assertFalse(credit_card_validator('423456789123456'))
+
+    def test_visa_invalid_prefix_and_checksum(self):
+        """
+        Verify that a number with an invalid issuer prefix,
+        valid length, and invalid Luhn checksum returns False.
+        Selected using combination testing and error guessing.
+        """
+        self.assertFalse(credit_card_validator('7263148936274021'))
+
+    def test_visa_invalid_prefix_and_length(self):
+        """
+        Verify that a number with an invalid issuer prefix,
+        invalid length, and valid Luhn checksum returns False.
+        Selected using combination testing and error guessing.
+        """
+        self.assertFalse(credit_card_validator('7263148936274029'))
+
+    def test_valid_all_three_invalid(self):
+        """
+        Verify that a number with invalid issuer prefix,
+        invalid length, and invalid Luhn checksum returns False.
+        Selected using combination testing and error guessing.
+        """
+        self.assertFalse(credit_card_validator('726314893627402'))
 
 
 if __name__ == '__main__':
