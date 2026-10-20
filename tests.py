@@ -273,7 +273,7 @@ class TestCreditCardValidator(unittest.TestCase):
         """
         self.assertFalse(credit_card_validator('7263148936274029'))
 
-    def test_valid_all_three_invalid(self):
+    def test_visa_all_three_invalid(self):
         """
         Verify that a number with invalid issuer prefix,
         invalid length, and invalid Luhn checksum returns False.
